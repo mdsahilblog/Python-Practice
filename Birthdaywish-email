@@ -21,12 +21,11 @@ if __name__=="__main__":
     for index,item in df.iterrows():
         bday=item['Birthday'].strftime("%d-%m")
         if(today==bday) and yearNow not in str(item['Year']):
-            sendmsg(5)
-    #        print(bday)
+            print(bday)
             sendEmail(item['Email'],"Happy Birthday",item['Dialogue'])
-    #         writeInd.append(index)
-    # for i in writeInd:
-    #     yr=df.loc[i,'Year']
-    #     df.loc[i,'Year']=str(yr)+','+str(yearNow)
-    #print(df)
-    #df.to_excel(w'C:\Users\User\Documents\\bday.xlsx',index=False)
+            writeInd.append(index)
+    for i in writeInd:
+        yr=df.loc[i,'Year']
+        df.loc[i,'Year']= str(yearNow)
+    print(df)
+    df.to_excel('birthdaysheet.xlsx',index=False)
