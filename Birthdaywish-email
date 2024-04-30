@@ -1,0 +1,33 @@
+import pandas as pd
+import datetime
+import smtplib
+
+GMAIL_ID='Your emailid' 
+GMAIL_PSWD='Youremailid password'
+
+def sendEmail(to,sub,msg):
+    print(f"Email to {to} sent with subject: {sub} and message {msg}")
+    s=smtplib.SMTP('smtp.gmail.com',587)
+    s.starttls()
+    s.login(GMAIL_ID,GMAIL_PSWD)
+    s.sendmail(GMAIL_ID,to,f"Subject:{sub}\n\n{msg}")
+    s.quit()
+def sendmsg(var1):
+    print(var1)
+if __name__=="__main__":
+    df=pd.read_excel('/content/gdrive/My Drive/Colab Notebooks/birthdaysheet.xlsx')
+    today=datetime.datetime.now().strftime("%d-%m")
+    yearNow=datetime.datetime.now().strftime("%Y")
+    writeInd=[]
+    for index,item in df.iterrows():
+        bday=item['Birthday'].strftime("%d-%m")
+        if(today==bday) and yearNow not in str(item['Year']):
+            sendmsg(5)
+    #        print(bday)
+            sendEmail(item['Email'],"Happy Birthday",item['Dialogue'])
+    #         writeInd.append(index)
+    # for i in writeInd:
+    #     yr=df.loc[i,'Year']
+    #     df.loc[i,'Year']=str(yr)+','+str(yearNow)
+    #print(df)
+    #df.to_excel(w'C:\Users\User\Documents\\bday.xlsx',index=False)
