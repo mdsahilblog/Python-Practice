@@ -12,10 +12,9 @@ def sendEmail(to,sub,msg):
     s.login(GMAIL_ID,GMAIL_PSWD)
     s.sendmail(GMAIL_ID,to,f"Subject:{sub}\n\n{msg}")
     s.quit()
-def sendmsg(var1):
-    print(var1)
+
 if __name__=="__main__":
-    df=pd.read_excel('/content/gdrive/My Drive/Colab Notebooks/birthdaysheet.xlsx')
+    df=pd.read_excel('birthdaysheet.xlsx')
     today=datetime.datetime.now().strftime("%d-%m")
     yearNow=datetime.datetime.now().strftime("%Y")
     writeInd=[]
